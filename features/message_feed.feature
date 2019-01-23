@@ -48,7 +48,7 @@ Feature: Posting messages
     When Bob views their feed
     Then they can see the message "I like @bOb" by Alice
 
-#  Scenario: The user mention is not a separated word
-#    Given Alice has posted a message "Ilike@Bob"
-#    When Bob views their feed
-#    Then they cannot see the message "Ilike@Bob" by Alice
+  Scenario: The user mention is not a separated word
+    Given Alice has posted a message "Ilike@Bob"
+    When Bob views their feed
+    Then they cannot see the message "Ilike@Bob" by Alice

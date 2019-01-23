@@ -30,3 +30,9 @@ def test_mentions_returns_false_if_the_user_is_a_substring_of_a_mention():
     message = Message(author='alice', text='where is @charliebrown?')
 
     assert message.mentions('charlie') is False
+
+
+def test_mentions_ignores_case():
+    message = Message(author='alice', text='hi @ChArLiE')
+
+    assert message.mentions('CHARlie') is True

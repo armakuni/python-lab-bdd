@@ -7,4 +7,4 @@ class Message:
         return self.author == user
 
     def mentions(self, user):
-        return f'@{user}' in self.text.split(' ')
+        return f'@{user.lower()}' in self.text.lower().split(' ')

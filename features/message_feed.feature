@@ -43,11 +43,11 @@ Feature: Posting messages
     When Bob views their feed
     Then they can see the message "I like @Bob a lot" by Alice
 
-#  Scenario: The user mention is in a different case
-#    Given Alice has posted a message "I like @bOb"
-#    When Bob views their feed
-#    Then they can see the message "I like @bOb" by Alice
-#
+  Scenario: The user mention is in a different case
+    Given Alice has posted a message "I like @bOb"
+    When Bob views their feed
+    Then they can see the message "I like @bOb" by Alice
+
 #  Scenario: The user mention is not a separated word
 #    Given Alice has posted a message "Ilike@Bob"
 #    When Bob views their feed

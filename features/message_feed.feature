@@ -33,11 +33,11 @@ Feature: Posting messages
     When Bob views their feed
     Then they can see the message "I like @Bob" by Alice
 
-#  Scenario: The user with a similar name has been mentioned
-#    Given Alice has posted a message "I like @BobHope"
-#    When Bob views their feed
-#    Then they cannot see the message "I like @BobHope" by Alice
-#
+  Scenario: The user with a similar name has been mentioned
+    Given Alice has posted a message "I like @BobHope"
+    When Bob views their feed
+    Then they cannot see the message "I like @BobHope" by Alice
+
 #  Scenario: The user is mentioned in the middle of a message
 #    Given Alice has posted a message "I like @Bob a lot"
 #    When Bob views their feed

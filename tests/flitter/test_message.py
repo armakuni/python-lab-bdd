@@ -24,3 +24,9 @@ def test_mentions_returns_false_if_the_mention_does_not_start_with_at_symbol():
     message = Message(author='alice', text='hello bob')
 
     assert message.mentions('bob') is False
+
+
+def test_mentions_returns_false_if_the_user_is_a_substring_of_a_mention():
+    message = Message(author='alice', text='where is @charliebrown?')
+
+    assert message.mentions('charlie') is False

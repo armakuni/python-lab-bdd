@@ -5,3 +5,6 @@ class Message:
 
     def is_by(self, user):
         return self.author == user
+
+    def mentions(self, user):
+        return f'@{user}' in self.text

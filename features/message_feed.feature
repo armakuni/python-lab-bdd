@@ -28,11 +28,11 @@ Feature: Posting messages
 
   # Rule: Users see messages which mention them
 
-#  Scenario: The user has been mentioned in a message
-#    Given Alice has posted a message "I like @Bob"
-#    When Bob views their feed
-#    Then they can see the message "I like @Bob" by Alice
-#
+  Scenario: The user has been mentioned in a message
+    Given Alice has posted a message "I like @Bob"
+    When Bob views their feed
+    Then they can see the message "I like @Bob" by Alice
+
 #  Scenario: The user with a similar name has been mentioned
 #    Given Alice has posted a message "I like @BobHope"
 #    When Bob views their feed

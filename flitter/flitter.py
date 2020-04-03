@@ -29,10 +29,10 @@ class Flitter:
         :return: All the messages as a list of dicts with author and message
         :rtype: list(dict(author=string, message=string))
         """
-
         feed = self._fetch_messages_by_user(user)
-
         feed += self._fetch_messages_by_followees_of_user(user)
+
+        feed = feed + self.message_store.fetch_mentioning(user)
 
         return [dict(author=msg.author, message=msg.text) for msg in feed]
 

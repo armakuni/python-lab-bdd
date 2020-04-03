@@ -1,4 +1,5 @@
 from flitter.flitter import Flitter
+
 from flitter.in_memory_follow_store import InMemoryFollowStore
 from flitter.in_memory_message_store import InMemoryMessageStore
 

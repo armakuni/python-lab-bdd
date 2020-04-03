@@ -3,29 +3,35 @@ from behave import given, when, then
 
 @given('{author} has posted a message "{message}"')
 def post_message(context, author, message):
-    raise NotImplementedError(context.errorMessage)
+    context.app.post(author=author, message=message)
 
 
 @given('{follower} follows {followee}')
 def follow(context, follower, followee):
-    raise NotImplementedError(context.errorMessage)
+    context.app.follow(follower=follower, followee=followee)
 
 
 @given('{follower} is not following {followee}')
 def do_not_follow(context, follower, followee):
-    raise NotImplementedError(context.errorMessage)
+    pass  # Do nothing
 
 
 @when('{user} views their feed')
 def view_feed(context, user):
-    raise NotImplementedError(context.errorMessage)
+    context.feed = context.app.get_feed_for(user)
 
 
 @then('they can see the message "{message}" by {author}')
 def assert_can_see_message(context, message, author):
-    raise NotImplementedError(context.errorMessage)
+    feed = context.feed
+    expected = dict(author=author, message=message)
+
+    assert expected in feed, f'{expected} should be in {feed}'
 
 
 @then('they cannot see the message "{message}" by {author}')
 def assert_cannot_see_message(context, message, author):
-    raise NotImplementedError(context.errorMessage)
+    feed = context.feed
+    expected = dict(author=author, message=message)
+
+    assert expected not in feed, f'{expected} should not be in {feed}'

@@ -1,0 +1,72 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+      - scenario4
+      - complete
+  schedule:
+    - cron:  '0 0 * * *'
+
+jobs:
+  broken-versions:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [macos-latest, ubuntu-latest]
+        branch: [master]
+    timeout-minutes: 20
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        ref: ${{ matrix.branch }}
+    - name: Set up Python 3.x
+      uses: actions/setup-python@v1
+      with:
+        python-version: '3.7'
+    - shell: bash
+      run: |
+        curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/install-poetry.py | python -
+        echo "$HOME/.local/bin" >> $GITHUB_PATH
+    - run: poetry install
+    - run: poetry run flake8
+    - run: poetry run python -m pytest
+    - shell: bash
+      run: |
+        if poetry run behave &> out ; then
+          exit 1
+        fi
+    - shell: bash
+      run: |
+        if ! grep -F "NotImplementedError: Unimplemented step. Please provide the implementation" out ; then
+          cat out
+          exit 1
+        fi
+
+  completed-versions:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [macos-latest, ubuntu-latest]
+        branch: [scenario4, complete]
+    timeout-minutes: 20
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        ref: ${{ matrix.branch }}
+    - name: Set up Python 3.x
+      uses: actions/setup-python@v1
+      with:
+        python-version: '3.7'
+        architecture: 'x64'
+    - shell: bash
+      run: |
+        curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/install-poetry.py | python -
+        echo "$HOME/.local/bin" >> $GITHUB_PATH
+    - run: poetry install
+    - run: poetry run flake8
+    - run: poetry run python -m pytest
+    - run: poetry run behave
